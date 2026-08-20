@@ -1,0 +1,100 @@
+{
+  "heroHeadline": "Transformo ideas en experiencias visuales que capturan atención.",
+  "heroSubheadline": "Video Editor, Motion Designer y VFX Artist. Convierto guiones y footage crudo en piezas cinematográficas que retienen, emocionan y convierten.",
+  "showreelTitle": "Showreel 2026",
+  "showreelDuration": "1:48",
+  "showreelType": "Reel de Compilación",
+  "showreelSoftware": [
+    "After Effects",
+    "DaVinci Resolve",
+    "Cinema 4D"
+  ],
+  "stats": [
+    {
+      "label": "Proyectos entregados",
+      "value": 150,
+      "suffix": "+"
+    },
+    {
+      "label": "Clientes",
+      "value": 40,
+      "suffix": "+"
+    },
+    {
+      "label": "Años de experiencia",
+      "value": 4,
+      "suffix": ""
+    },
+    {
+      "label": "Visualizaciones generadas",
+      "value": 50,
+      "suffix": "M+"
+    }
+  ],
+  "services": [
+    {
+      "title": "Video Editing",
+      "description": "Narrativa, ritmo y estructura para contenido de cualquier formato.",
+      "icon": "Scissors"
+    },
+    {
+      "title": "Motion Graphics",
+      "description": "Animación y tipografía en movimiento para marcas con carácter.",
+      "icon": "Sparkles"
+    },
+    {
+      "title": "VFX",
+      "description": "Composición e integración de efectos visuales de alto nivel.",
+      "icon": "Wand2"
+    },
+    {
+      "title": "YouTube",
+      "description": "Edición optimizada para retención y crecimiento de canal.",
+      "icon": "Youtube"
+    },
+    {
+      "title": "Color Grading",
+      "description": "Look cinematográfico consistente escena a escena.",
+      "icon": "Palette"
+    },
+    {
+      "title": "Short Form",
+      "description": "Contenido vertical de alto impacto para redes sociales.",
+      "icon": "Smartphone"
+    },
+    {
+      "title": "Long Form",
+      "description": "Documentales y contenido narrativo de largo formato.",
+      "icon": "Film"
+    },
+    {
+      "title": "Ads",
+      "description": "Piezas publicitarias diseñadas para convertir.",
+      "icon": "Target"
+    }
+  ],
+  "socials": [
+    {
+      "label": "Instagram",
+      "href": "https://instagram.com",
+      "icon": "Instagram"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://linkedin.com",
+      "icon": "Linkedin"
+    },
+    {
+      "label": "YouTube",
+      "href": "https://youtube.com",
+      "icon": "Youtube"
+    },
+    {
+      "label": "Behance",
+      "href": "https://behance.net",
+      "icon": "Behance"
+    }
+  ],
+  "contactEmail": "hola@tudominio.com",
+  "whatsapp": "https://wa.me/56900000000"
+}

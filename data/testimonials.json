@@ -1,0 +1,50 @@
+[
+  {
+    "id": "t1",
+    "order": 1,
+    "name": "Camila Rossi",
+    "role": "Directora de Marca",
+    "company": "Nocturne Audio",
+    "quote": "Entendió la identidad de la marca mejor que nosotros mismos. El resultado se sintió cinematográfico desde el primer corte.",
+    "avatarPalette": [
+      "#ff6a00",
+      "#1a1a1d"
+    ]
+  },
+  {
+    "id": "t2",
+    "order": 2,
+    "name": "Mateo Fierro",
+    "role": "Productor Ejecutivo",
+    "company": "Halo Films",
+    "quote": "Nivel de precisión y criterio de color que normalmente solo vemos en estudios mucho más grandes.",
+    "avatarPalette": [
+      "#0b0b0d",
+      "#ff8a3d"
+    ]
+  },
+  {
+    "id": "t3",
+    "order": 3,
+    "name": "Renata Solís",
+    "role": "Head of Growth",
+    "company": "Pulse Wearables",
+    "quote": "Las métricas hablan solas: cada pieza que entregó superó nuestro benchmark de retención.",
+    "avatarPalette": [
+      "#ff6a00",
+      "#050505"
+    ]
+  },
+  {
+    "id": "t4",
+    "order": 4,
+    "name": "Diego Amaro",
+    "role": "Fundador",
+    "company": "Aeon Studio",
+    "quote": "Un profesional que piensa en sistemas, no solo en videos individuales. Elevó por completo nuestra identidad de marca.",
+    "avatarPalette": [
+      "#1a1a1d",
+      "#ff6a00"
+    ]
+  }
+]

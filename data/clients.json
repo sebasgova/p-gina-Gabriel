@@ -1,0 +1,79 @@
+[
+  {
+    "id": "c1",
+    "order": 1,
+    "name": "Nicolle Figueroa",
+    "platform": "TikTok",
+    "followers": "1.9M",
+    "avatarPalette": [
+      "#ff6a00",
+      "#1a1a1d"
+    ]
+  },
+  {
+    "id": "c2",
+    "order": 2,
+    "name": "Augus Gimenez",
+    "platform": "TikTok",
+    "followers": "21.8M",
+    "avatarPalette": [
+      "#0b0b0d",
+      "#ff8a3d"
+    ]
+  },
+  {
+    "id": "c3",
+    "order": 3,
+    "name": "Holayeyo",
+    "platform": "Youtube",
+    "followers": "8M",
+    "avatarPalette": [
+      "#ff6a00",
+      "#050505"
+    ]
+  },
+  {
+    "id": "c4",
+    "order": 4,
+    "name": "Lucky Masked",
+    "platform": "Facebook",
+    "followers": "4M",
+    "avatarPalette": [
+      "#1a1a1d",
+      "#ff6a00"
+    ]
+  },
+  {
+    "id": "c5",
+    "order": 5,
+    "name": "Toni Metabólico",
+    "platform": "TikTok",
+    "followers": "1.5M",
+    "avatarPalette": [
+      "#ff8a3d",
+      "#0c0c0d"
+    ]
+  },
+  {
+    "id": "c6",
+    "order": 6,
+    "name": "Mowlihawk",
+    "platform": "Youtube",
+    "followers": "1M",
+    "avatarPalette": [
+      "#ff6a00",
+      "#151517"
+    ]
+  },
+  {
+    "id": "c7",
+    "order": 7,
+    "name": "Dani Ordoñez",
+    "platform": "Instagram",
+    "followers": "65.4k",
+    "avatarPalette": [
+      "#0b0b0d",
+      "#ff6a00"
+    ]
+  }
+]

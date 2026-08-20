@@ -1,0 +1,192 @@
+[
+  {
+    "id": "p1",
+    "order": 1,
+    "published": true,
+    "title": "Nocturne — Campaña de Lanzamiento",
+    "slug": "nocturne-campana-lanzamiento",
+    "client": "Nocturne Audio",
+    "category": "Ads",
+    "software": [
+      "After Effects",
+      "Premiere Pro",
+      "DaVinci Resolve"
+    ],
+    "duration": "0:45",
+    "year": 2026,
+    "thumbnailPalette": [
+      "#ff6a00",
+      "#150a05"
+    ],
+    "videoUrl": "",
+    "description": "Spot de lanzamiento para la nueva línea de audífonos Nocturne. Edición rítmica sincronizada a la banda sonora, motion graphics de producto y grading cinematográfico de alto contraste.",
+    "result": "+2.4M reproducciones en la primera semana y +38% de CTR sobre el promedio histórico de la marca.",
+    "tools": [
+      "Edición",
+      "Motion Graphics",
+      "Color Grading",
+      "Sound Design"
+    ],
+    "ctr": "+38%",
+    "beforeImageUrl": "",
+    "afterImageUrl": "",
+    "showBeforeAfter": true
+  },
+  {
+    "id": "p2",
+    "order": 2,
+    "published": true,
+    "title": "Aeon — Identidad de Marca en Movimiento",
+    "slug": "aeon-identidad-en-movimiento",
+    "client": "Aeon Studio",
+    "category": "Motion Graphics",
+    "software": [
+      "After Effects",
+      "Cinema 4D",
+      "Illustrator"
+    ],
+    "duration": "1:20",
+    "year": 2026,
+    "thumbnailPalette": [
+      "#ffffff",
+      "#151517"
+    ],
+    "videoUrl": "",
+    "description": "Sistema de motion graphics para la identidad de marca de Aeon: logotipo cinético, transiciones modulares y un kit de plantillas para redes sociales.",
+    "result": "Adoptado como estándar de marca en 6 plataformas distintas.",
+    "tools": [
+      "Motion Design",
+      "Brand System",
+      "3D Type"
+    ],
+    "ctr": "+21%",
+    "beforeImageUrl": "",
+    "afterImageUrl": "",
+    "showBeforeAfter": false
+  },
+  {
+    "id": "p3",
+    "order": 3,
+    "published": true,
+    "title": "Fragmento — Cortometraje VFX",
+    "slug": "fragmento-cortometraje-vfx",
+    "client": "Estudio Independiente",
+    "category": "VFX",
+    "software": [
+      "Blender",
+      "After Effects",
+      "DaVinci Resolve"
+    ],
+    "duration": "3:12",
+    "year": 2025,
+    "thumbnailPalette": [
+      "#ff8a3d",
+      "#0c0c0d"
+    ],
+    "videoUrl": "",
+    "description": "Composición de efectos visuales para un cortometraje experimental: partículas, simulaciones y integración de elementos 3D con placas reales.",
+    "result": "Seleccionado en 3 festivales de cine independiente.",
+    "tools": [
+      "VFX Compositing",
+      "3D Integration",
+      "Simulación"
+    ],
+    "ctr": "+64%",
+    "beforeImageUrl": "",
+    "afterImageUrl": "",
+    "showBeforeAfter": true
+  },
+  {
+    "id": "p4",
+    "order": 4,
+    "published": true,
+    "title": "Ritual — Serie Documental",
+    "slug": "ritual-serie-documental",
+    "client": "Canal Independiente",
+    "category": "Long Form",
+    "software": [
+      "Premiere Pro",
+      "DaVinci Resolve"
+    ],
+    "duration": "18:40",
+    "year": 2025,
+    "thumbnailPalette": [
+      "#ffffff",
+      "#171310"
+    ],
+    "videoUrl": "",
+    "description": "Edición narrativa de largo formato para una serie documental de tres episodios, con estructura de guion, ritmo pausado y grading orgánico.",
+    "result": "Retención promedio de 71% en YouTube, muy por encima del estándar del canal.",
+    "tools": [
+      "Edición Narrativa",
+      "Color Grading",
+      "Estructura de Guion"
+    ],
+    "ctr": "+71% retención",
+    "beforeImageUrl": "",
+    "afterImageUrl": "",
+    "showBeforeAfter": false
+  },
+  {
+    "id": "p5",
+    "order": 5,
+    "published": true,
+    "title": "Pulse — Shorts de Producto",
+    "slug": "pulse-shorts-de-producto",
+    "client": "Pulse Wearables",
+    "category": "Short Form",
+    "software": [
+      "Premiere Pro",
+      "After Effects"
+    ],
+    "duration": "0:32",
+    "year": 2026,
+    "thumbnailPalette": [
+      "#ff6a00",
+      "#0b0b0d"
+    ],
+    "videoUrl": "",
+    "description": "Serie de shorts verticales de alto impacto para lanzamiento de producto, optimizados para retención en los primeros 3 segundos.",
+    "result": "9.8M de vistas orgánicas combinadas en TikTok e Instagram Reels.",
+    "tools": [
+      "Edición Vertical",
+      "Motion Graphics",
+      "Hook Writing"
+    ],
+    "ctr": "+112%",
+    "beforeImageUrl": "",
+    "afterImageUrl": "",
+    "showBeforeAfter": true
+  },
+  {
+    "id": "p6",
+    "order": 7,
+    "published": true,
+    "title": "Halo — Grading Cinematográfico",
+    "slug": "halo-grading-cinematografico",
+    "client": "Halo Films",
+    "category": "Color Grading",
+    "software": [
+      "DaVinci Resolve",
+      "Photoshop"
+    ],
+    "duration": "2:05",
+    "year": 2025,
+    "thumbnailPalette": [
+      "#ffffff",
+      "#120a06"
+    ],
+    "videoUrl": "",
+    "description": "Corrección y grading de color para un teaser de largometraje: construcción de un look cinematográfico coherente escena a escena.",
+    "result": "Look adoptado como referencia visual oficial del largometraje.",
+    "tools": [
+      "Color Correction",
+      "Look Development",
+      "Delivery"
+    ],
+    "ctr": "+29%",
+    "beforeImageUrl": "",
+    "afterImageUrl": "",
+    "showBeforeAfter": true
+  }
+]
