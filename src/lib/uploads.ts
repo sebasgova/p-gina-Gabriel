@@ -1,21 +1,47 @@
 import "server-only";
-import { promises as fs } from "fs";
-import path from "path";
 
-const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
+import path from "path";
+import { supabaseAdmin, STORAGE_BUCKET } from "./supabaseAdmin";
 
 function safeExtension(filename: string) {
   const ext = path.extname(filename).toLowerCase().replace(/[^a-z0-9.]/g, "");
   return ext || "";
 }
 
+function safeBase(filename: string) {
+  return (
+    path
+      .basename(filename, path.extname(filename))
+      .normalize("NFKD")
+      .replace(/[^a-zA-Z0-9_-]/g, "-")
+      .replace(/-+/g, "-")
+      .slice(0, 80) || "file"
+  );
+}
+
 export async function saveUpload(file: File): Promise<string> {
-  await fs.mkdir(UPLOAD_DIR, { recursive: true });
   const ext = safeExtension(file.name);
-  const name = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}${ext}`;
+  const name = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}-${safeBase(file.name)}${ext}`;
+  const objectPath = `portfolio/${name}`;
   const buffer = Buffer.from(await file.arrayBuffer());
-  await fs.writeFile(path.join(UPLOAD_DIR, name), buffer);
-  return `/api/uploads/${name}`;
+
+  const { error } = await supabaseAdmin.storage
+    .from(STORAGE_BUCKET)
+    .upload(objectPath, buffer, {
+      contentType: file.type || "application/octet-stream",
+      cacheControl: "31536000",
+      upsert: false,
+    });
+
+  if (error) {
+    throw new Error(`Supabase Storage upload failed: ${error.message}`);
+  }
+
+  const { data } = supabaseAdmin.storage
+    .from(STORAGE_BUCKET)
+    .getPublicUrl(objectPath);
+
+  return data.publicUrl;
 }
 
 export async function saveUploadIfPresent(file: File | null): Promise<string | undefined> {
@@ -23,15 +49,19 @@ export async function saveUploadIfPresent(file: File | null): Promise<string | u
   return saveUpload(file);
 }
 
-/** Deletes a previously uploaded file given its public `/api/uploads/...` or `/uploads/...` URL. Safe no-op for anything else. */
 export async function deleteUpload(url: string | undefined | null): Promise<void> {
   if (!url) return;
-  if (!url.startsWith("/api/uploads/") && !url.startsWith("/uploads/")) return;
-  const filename = path.basename(url);
-  if (!filename || filename.includes("..")) return;
+
   try {
-    await fs.unlink(path.join(UPLOAD_DIR, filename));
+    const marker = `/storage/v1/object/public/${STORAGE_BUCKET}/`;
+    const markerIndex = url.indexOf(marker);
+    if (markerIndex === -1) return;
+
+    const objectPath = decodeURIComponent(url.slice(markerIndex + marker.length));
+    if (!objectPath || objectPath.includes("..")) return;
+
+    await supabaseAdmin.storage.from(STORAGE_BUCKET).remove([objectPath]);
   } catch {
-    // already gone — fine.
+    // A missing/old file should not prevent saving the project.
   }
 }
