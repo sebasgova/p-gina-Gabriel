@@ -51,9 +51,17 @@ export function MediaField({
           <div className="group relative aspect-video w-full overflow-hidden rounded-xl border border-line-strong bg-black">
             {kind === "image" ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={activeUrl} alt="" className="h-full w-full object-cover" />
+              <img src={activeUrl} alt="" className="h-full w-full object-contain" />
             ) : (
-              <video src={activeUrl} className="h-full w-full object-cover" muted />
+              <video
+                src={activeUrl}
+                className="h-full w-full object-contain bg-black"
+                muted
+                autoPlay
+                loop
+                playsInline
+                preload="metadata"
+              />
             )}
             <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/0 opacity-0 transition-all group-hover:bg-black/60 group-hover:opacity-100">
               <button
