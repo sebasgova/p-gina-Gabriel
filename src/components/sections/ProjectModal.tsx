@@ -29,44 +29,65 @@ function ProjectModalBody({ project, onClose }: { project: Project; onClose: () 
         <X size={18} />
       </button>
 
-      <div className="relative aspect-video w-full">
-        {playing && project.videoUrl ? (
-          <video
-            src={project.videoUrl}
-            controls
-            autoPlay
-            className="h-full w-full bg-black object-cover"
-          />
-        ) : (
+      <div className="relative flex min-h-[280px] w-full items-center justify-center bg-black md:min-h-0 md:aspect-video">
+        {project.videoUrl ? (
           <>
-            {project.thumbnailUrl ? (
-              <Image
-                src={project.thumbnailUrl}
-                alt={project.title}
-                fill
-                sizes="(min-width: 768px) 80vw, 100vw"
-                className="object-cover"
-              />
-            ) : (
-              <ProjectPoster
-                palette={project.thumbnailPalette}
-                category={project.category}
-                className="absolute inset-0 h-full w-full"
-              />
+            <video
+              src={project.videoUrl}
+              muted={!playing}
+              autoPlay
+              loop={!playing}
+              playsInline
+              preload="metadata"
+              controls={playing}
+              autoFocus={playing}
+              className="absolute inset-0 h-full w-full object-contain bg-black"
+            />
+            {!playing && (
+              <button
+                onClick={() => setPlaying(true)}
+                data-cursor="hover"
+                aria-label="Reproducir video del proyecto"
+                className="absolute inset-0 z-[1] flex items-center justify-center bg-transparent"
+              >
+                <MagneticButton strength={0.2}>
+                  <span className="flex h-20 w-20 items-center justify-center rounded-full bg-white/95 text-black shadow-2xl transition-transform hover:scale-110">
+                    <Play size={22} className="ml-1" fill="currentColor" />
+                  </span>
+                </MagneticButton>
+              </button>
             )}
-            <button
-              onClick={() => setPlaying(true)}
-              data-cursor="hover"
-              aria-label="Reproducir video del proyecto"
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <MagneticButton strength={0.2}>
-                <span className="flex h-20 w-20 items-center justify-center rounded-full bg-white/95 text-black transition-transform hover:scale-110">
-                  <Play size={22} className="ml-1" fill="currentColor" />
-                </span>
-              </MagneticButton>
-            </button>
           </>
+        ) : project.thumbnailUrl ? (
+          <>
+            <Image
+              src={project.thumbnailUrl}
+              alt={project.title}
+              fill
+              sizes="(min-width: 768px) 80vw, 100vw"
+              className="object-contain bg-black"
+            />
+            {project.videoUrl && (
+              <button
+                onClick={() => setPlaying(true)}
+                data-cursor="hover"
+                aria-label="Reproducir video del proyecto"
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <MagneticButton strength={0.2}>
+                  <span className="flex h-20 w-20 items-center justify-center rounded-full bg-white/95 text-black transition-transform hover:scale-110">
+                    <Play size={22} className="ml-1" fill="currentColor" />
+                  </span>
+                </MagneticButton>
+              </button>
+            )}
+          </>
+        ) : (
+          <ProjectPoster
+            palette={project.thumbnailPalette}
+            category={project.category}
+            className="absolute inset-0 h-full w-full"
+          />
         )}
       </div>
 
