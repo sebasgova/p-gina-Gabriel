@@ -15,7 +15,7 @@ export async function saveUpload(file: File): Promise<string> {
   const name = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}${ext}`;
   const buffer = Buffer.from(await file.arrayBuffer());
   await fs.writeFile(path.join(UPLOAD_DIR, name), buffer);
-  return `/uploads/${name}`;
+  return `/api/uploads/${name}`;
 }
 
 export async function saveUploadIfPresent(file: File | null): Promise<string | undefined> {
@@ -23,9 +23,10 @@ export async function saveUploadIfPresent(file: File | null): Promise<string | u
   return saveUpload(file);
 }
 
-/** Deletes a previously uploaded file given its public `/uploads/...` URL. Safe no-op for anything else. */
+/** Deletes a previously uploaded file given its public `/api/uploads/...` or `/uploads/...` URL. Safe no-op for anything else. */
 export async function deleteUpload(url: string | undefined | null): Promise<void> {
-  if (!url || !url.startsWith("/uploads/")) return;
+  if (!url) return;
+  if (!url.startsWith("/api/uploads/") && !url.startsWith("/uploads/")) return;
   const filename = path.basename(url);
   if (!filename || filename.includes("..")) return;
   try {
