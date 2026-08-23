@@ -41,7 +41,7 @@ export function ProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      className={`group relative w-full overflow-hidden rounded-3xl border border-line text-left transition-shadow duration-500 hover:border-accent/50 ${
+      className={`group relative w-full overflow-hidden rounded-3xl border border-line bg-black text-left transition-shadow duration-500 hover:border-accent/50 ${
         tall ? "aspect-[3/4]" : "aspect-[4/3]"
       }`}
       style={{
@@ -50,13 +50,24 @@ export function ProjectCard({
           : "0 20px 50px -30px rgba(0,0,0,0.5)",
       }}
     >
-      {project.thumbnailUrl ? (
+      {project.videoUrl ? (
+        <video
+          src={project.videoUrl}
+          muted
+          autoPlay
+          loop
+          playsInline
+          preload="metadata"
+          aria-label={project.title}
+          className="absolute inset-0 h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+        />
+      ) : project.thumbnailUrl ? (
         <Image
           src={project.thumbnailUrl}
           alt={project.title}
           fill
           sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+          className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
         />
       ) : (
         <ProjectPoster
@@ -66,12 +77,17 @@ export function ProjectCard({
         />
       )}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
 
       <div className="absolute left-6 top-6 flex flex-wrap gap-2">
         <span className="rounded-full border border-white/20 bg-black/30 px-3 py-1 text-[11px] uppercase tracking-wider text-white/80 backdrop-blur">
           {project.category}
         </span>
+        {project.videoUrl && (
+          <span className="rounded-full border border-white/20 bg-black/30 px-3 py-1 text-[11px] uppercase tracking-wider text-white/80 backdrop-blur">
+            Video
+          </span>
+        )}
       </div>
 
       <div className="absolute inset-x-0 bottom-0 p-6">
