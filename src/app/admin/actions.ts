@@ -48,27 +48,36 @@ function list(formData: FormData, key: string) {
 }
 
 /**
- * Resolves a file field against an optional "remove" checkbox:
- * - a new file was uploaded  -> saves it (and deletes the old one), returns the new URL
- * - "remove" was requested   -> deletes the old file, returns "" (explicit clear)
- * - otherwise                -> returns the existing URL untouched
+ * Media is normally uploaded by the browser through /api/admin/upload.
+ * The URL is then submitted as a small string, avoiding large File objects
+ * inside the Next.js Server Action request.
+ * The File fallback remains for compatibility with older clients.
  */
 async function resolveMedia(
   formData: FormData,
   fileKey: string,
+  urlKey: string,
   removeKey: string,
   currentUrl?: string
 ): Promise<string | undefined> {
+  const uploadedUrl = str(formData, urlKey);
+  if (uploadedUrl) {
+    if (currentUrl && uploadedUrl !== currentUrl) await deleteUpload(currentUrl);
+    return uploadedUrl;
+  }
+
   const file = formData.get(fileKey) as File | null;
   const newUrl = await saveUploadIfPresent(file);
   if (newUrl) {
     if (currentUrl) await deleteUpload(currentUrl);
     return newUrl;
   }
+
   if (formData.get(removeKey) === "true") {
     if (currentUrl) await deleteUpload(currentUrl);
     return "";
   }
+
   return currentUrl;
 }
 
@@ -96,10 +105,10 @@ export async function saveProjectAction(id: string | null, formData: FormData) {
   const existing = id ? await getProjectById(id) : undefined;
 
   const [thumbnailUrl, videoUrl, beforeImageUrl, afterImageUrl] = await Promise.all([
-    resolveMedia(formData, "thumbnailFile", "removeThumbnail", existing?.thumbnailUrl),
-    resolveMedia(formData, "videoFile", "removeVideo", existing?.videoUrl),
-    resolveMedia(formData, "beforeImageFile", "removeBeforeImage", existing?.beforeImageUrl),
-    resolveMedia(formData, "afterImageFile", "removeAfterImage", existing?.afterImageUrl),
+    resolveMedia(formData, "thumbnailFile", "thumbnailUrl", "removeThumbnail", existing?.thumbnailUrl),
+    resolveMedia(formData, "videoFile", "videoUrl", "removeVideo", existing?.videoUrl),
+    resolveMedia(formData, "beforeImageFile", "beforeImageUrl", "removeBeforeImage", existing?.beforeImageUrl),
+    resolveMedia(formData, "afterImageFile", "afterImageUrl", "removeAfterImage", existing?.afterImageUrl),
   ]);
 
   const base: Omit<Project, "id" | "order" | "slug"> = {
@@ -166,7 +175,7 @@ export async function moveProjectAction(id: string, direction: "up" | "down") {
 export async function saveTestimonialAction(id: string | null, formData: FormData) {
   const testimonials = await getAllTestimonials();
   const existing = testimonials.find((t) => t.id === id);
-  const avatarUrl = await resolveMedia(formData, "avatarFile", "removeAvatar", existing?.avatarUrl);
+  const avatarUrl = await resolveMedia(formData, "avatarFile", "avatarUrl", "removeAvatar", existing?.avatarUrl);
 
   const payload = {
     name: str(formData, "name"),
@@ -200,7 +209,7 @@ export async function saveClientAction(id: string | null, formData: FormData) {
   const clients = await getAllClients();
   const existing = clients.find((c) => c.id === id);
 
-  const avatarUrl = await resolveMedia(formData, "avatarFile", "removeAvatar", existing?.avatarUrl);
+  const avatarUrl = await resolveMedia(formData, "avatarFile", "avatarUrl", "removeAvatar", existing?.avatarUrl);
 
   const payload = {
     name: str(formData, "name"),
