@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -35,30 +36,82 @@ function Field({
 const inputClass =
   "h-11 w-full rounded-xl border border-line-strong bg-white/[0.03] px-4 text-sm outline-none focus:border-accent";
 
-function SubmitButton() {
+function SubmitButton({ uploading }: { uploading: boolean }) {
   const { pending } = useFormStatus();
+  const disabled = pending || uploading;
   return (
     <button
       type="submit"
-      disabled={pending}
+      disabled={disabled}
       className="inline-flex h-12 items-center rounded-full bg-accent px-8 text-sm font-medium text-black hover:bg-accent-soft disabled:opacity-60"
     >
-      {pending ? "Guardando…" : "Guardar proyecto"}
+      {uploading ? "Subiendo archivos…" : pending ? "Guardando…" : "Guardar proyecto"}
     </button>
   );
 }
 
+async function uploadFile(file: File): Promise<string> {
+  const data = new FormData();
+  data.append("file", file);
+
+  const response = await fetch("/api/admin/upload", {
+    method: "POST",
+    body: data,
+  });
+
+  const result = (await response.json()) as { url?: string; error?: string };
+  if (!response.ok || !result.url) {
+    throw new Error(result.error || "No se pudo subir el archivo.");
+  }
+  return result.url;
+}
+
 export function ProjectForm({ project }: { project?: Project }) {
   const router = useRouter();
+  const [uploading, setUploading] = useState(false);
   const boundAction = saveProjectAction.bind(null, project?.id ?? null);
 
   return (
     <form
       action={async (formData) => {
-        await boundAction(formData);
-        toast.success(project ? "Proyecto actualizado" : "Proyecto creado");
-        router.push("/admin/projects");
-        router.refresh();
+        if (uploading) return;
+        setUploading(true);
+        try {
+          const fileKeys = [
+            "thumbnailFile",
+            "videoFile",
+            "beforeImageFile",
+            "afterImageFile",
+          ];
+          const urlKeys = [
+            "thumbnailUrl",
+            "videoUrl",
+            "beforeImageUrl",
+            "afterImageUrl",
+          ];
+
+          const files = fileKeys.map((key) => formData.get(key));
+          const uploads = await Promise.all(
+            files.map((value) =>
+              value instanceof File && value.size > 0 ? uploadFile(value) : Promise.resolve("")
+            )
+          );
+
+          fileKeys.forEach((key) => formData.delete(key));
+          uploads.forEach((url, index) => {
+            if (url) formData.set(urlKeys[index], url);
+          });
+
+          await boundAction(formData);
+          toast.success(project ? "Proyecto actualizado" : "Proyecto creado");
+          router.push("/admin/projects");
+          router.refresh();
+        } catch (error) {
+          const message = error instanceof Error ? error.message : "No se pudo guardar el proyecto.";
+          toast.error(message);
+        } finally {
+          setUploading(false);
+        }
       }}
       className="max-w-3xl space-y-8"
     >
@@ -217,7 +270,7 @@ export function ProjectForm({ project }: { project?: Project }) {
         </label>
       </div>
 
-      <SubmitButton />
+      <SubmitButton uploading={uploading} />
     </form>
   );
 }
